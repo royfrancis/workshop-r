@@ -58,7 +58,7 @@ jobs:
           # Generate PDFs
           cd ${PATH_EXPORT}
           echo "Generating PDFs ..."
-          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v ${PWD}:/rmd ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} Rscript -e "l <- list.files('.',pattern='slide.+html');if(length(l)!=0) {for(i in 1:length(l)) pagedown::chrome_print(l[i],extra_args=c('--no-sandbox','--disable-dev-shm-usage','--disable-gpu'),verbose=1,async=TRUE)$then(onFulfilled = function(value) {showNotification(paste("PDF file succesfully generated"),type = "message")};"
+          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v ${PWD}:/rmd ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} Rscript -e "l <- list.files('.',pattern='slide.+html');if(length(l)!=0) {for(i in 1:length(l)) pagedown::chrome_print(l[i],extra_args=c('--no-sandbox','--disable-dev-shm-usage','--disable-gpu'),verbose=1,async=TRUE);"
           # alternative solution using decktape
           # for html_file in slide_*.html; do
           #  if [ -f "$html_file" ]; then
