@@ -11,7 +11,7 @@ env:
 
 jobs:
   rmd-render-job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Set time zone  
         uses: szenius/set-timezone@v2.0
