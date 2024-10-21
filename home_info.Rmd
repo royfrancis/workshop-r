@@ -90,7 +90,7 @@ if (length(unlist(strsplit(loc,","))) == 2) {
 
 ```
 
-```{r,eval=TRUE,echo=FALSE,chunk.title=NULL,fig.show='hold'}
+```{r,eval=FALSE,echo=FALSE,chunk.title=NULL,fig.show='hold'}
 library(manipulateWidget)
 # single location
 if(loc!="online" & length(unlist(strsplit(loc,","))) == 1) {
