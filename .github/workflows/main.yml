@@ -7,8 +7,8 @@ on:
       - gh-pages
 env:
   REGISTRY: ghcr.io
-  ORG: nbisweden
-  IMAGE: workshop-r:1.0.0
+  ORG: royfrancis
+  IMAGE: workshop-r:v1
 
 jobs:
   rmd-render-job:
@@ -59,15 +59,15 @@ jobs:
           cd ${PATH_EXPORT}
           echo "Generating PDFs ..."
           docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v ${PWD}:/rmd ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} google-chrome-stable --headless --disable-gpu --disable-dev-shm-usage --no-sandbox --screenshot --window-size=1280,1024 https://www.example.com
-          # docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v ${PWD}:/rmd ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} Rscript -e "l <- list.files('.',pattern='slide.+html');if(length(l)!=0) {for(i in 1:length(l)) pagedown::chrome_print(l[i],extra_args=c('--no-sandbox','--disable-dev-shm-usage','--disable-gpu'))};"
+          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v ${PWD}:/rmd ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} Rscript -e "l <- list.files('.',pattern='slide.+html');if(length(l)!=0) {for(i in 1:length(l)) pagedown::chrome_print(l[i],extra_args=c('--no-sandbox','--disable-dev-shm-usage','--disable-gpu'))};"
           # alternative solution using decktape
-           for html_file in slide_*.html; do
-            if [ -f "$html_file" ]; then
-              base_name="${html_file%.html}"
-              pdf_file="${base_name}.pdf"
-              docker run --rm -u "$(id -u "${USER}"):$(id -g "${USER}")" -v "${PWD}:/slides" astefanutti/decktape:3.12.0 "/slides/${html_file}" "/slides/${pdf_file}" --chrome-arg=--no-sandbox --chrome-arg=--disable-dev-shm-usage --chrome-arg=--disable-gpu
-            fi
-           done
+          # for html_file in slide_*.html; do
+          #  if [ -f "$html_file" ]; then
+          #    base_name="${html_file%.html}"
+          #    pdf_file="${base_name}.pdf"
+          #    docker run --rm -u "$(id -u "${USER}"):$(id -g "${USER}")" -v "${PWD}:/slides" astefanutti/decktape:3.12.0 "/slides/${html_file}" "/slides/${pdf_file}" --chrome-arg=--no-sandbox --chrome-arg=--disable-dev-shm-usage --chrome-arg=--disable-gpu
+          #  fi
+          # done
           cd ..
 
           # Render canvas version of website by changing _site.yml

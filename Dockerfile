@@ -1,6 +1,6 @@
 # DOCKER FILE FOR WORKSHOP-R
 
-FROM ghcr.io/rocker-org/verse:4.4.1
+FROM ghcr.io/rocker-org/verse:4.2.3
 LABEL Description="Docker image for NBIS workshop-r"
 LABEL Maintainer="roy.francis@nbis.se"
 LABEL org.opencontainers.image.source="https://github.com/NBISweden/workshop-r"
